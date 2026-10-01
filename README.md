@@ -4,7 +4,7 @@
 
 ### End-to-End Campus Placement Tracking System Using Advanced Database Management Concepts
 
-An ADBMS mini project that shows MongoDB's advanced features in a real, working web app.
+An ADBMS project that shows MongoDB's advanced features in a real, working web app.
 
 ![Python](https://img.shields.io/badge/Python-3.9%2B-3776AB?logo=python&logoColor=white)
 ![Flask](https://img.shields.io/badge/Flask-3.x-000000?logo=flask&logoColor=white)
