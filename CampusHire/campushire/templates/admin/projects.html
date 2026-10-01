@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% from '_macros.html' import empty %}
+{% block title %}Student projects{% endblock %}
+{% block content %}
+<h2 class="page-title">Student projects</h2>
+<form class="glass glass-body mb-4" method="get"><div class="row g-2"><div class="col-sm-8 col-md-5"><input class="form-control" name="tech" value="{{ tech }}" placeholder="Filter by technology, e.g. flask" aria-label="Technology"></div><div class="col-auto"><button class="btn btn-primary"><i class="bi bi-search"></i> Filter</button></div></div></form>
+<div class="row g-3">
+  {% for p in items %}
+  <div class="col-md-6 col-xl-4"><div class="glass glass-body h-100">
+    <img class="project-shot mb-3" src="{{ url_for('serve_file', file_id=p.screenshot_id) }}" alt="{{ p.title }} screenshot" loading="lazy">
+    <h5 class="mb-1">{{ p.title }}</h5>
+    <div class="small mb-2"><a href="{{ url_for('admin_student_detail', student_id=p.student._id) }}">{{ p.student.name }}</a> <span class="text-muted">&middot; {{ p.student.usn }}</span></div>
+    <p class="small text-muted">{{ p.description }}</p>
+    {% for t in p.technologies %}<span class="chip">{{ t }}</span>{% endfor %}
+    {% if p.github_url %}<div class="mt-2"><a href="{{ p.github_url }}" target="_blank" rel="noopener noreferrer"><i class="bi bi-github"></i> Repository</a></div>{% endif %}
+  </div></div>
+  {% else %}<div class="col-12"><div class="glass glass-body">{{ empty('bi-kanban', 'No projects found', 'Projects appear here once students upload them.') }}</div></div>{% endfor %}
+</div>
+{% endblock %}

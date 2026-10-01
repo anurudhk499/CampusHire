@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% from '_macros.html' import csrf %}
+{% block title %}Placement officer login{% endblock %}
+{% block content %}
+<div class="auth-wrap glass glass-body">
+  <h3 class="mb-1"><i class="bi bi-shield-lock text-primary"></i> Placement officer</h3>
+  <p class="text-muted">Sign in to manage drives, students and results.</p>
+  <form method="post" novalidate>
+    {{ csrf() }}
+    <div class="mb-3"><label class="form-label" for="username">Username</label>
+      <input class="form-control" id="username" name="username" required autofocus autocomplete="username"></div>
+    <div class="mb-4"><label class="form-label" for="password">Password</label>
+      <input class="form-control" type="password" id="password" name="password" required autocomplete="current-password"></div>
+    <button class="btn btn-primary w-100">Sign in</button>
+  </form>
+</div>
+{% endblock %}

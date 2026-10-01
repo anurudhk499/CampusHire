@@ -1,0 +1,178 @@
+[
+  {
+    "usn": "CH22AI001",
+    "name": "Aarav Sharma",
+    "branch": "AIML",
+    "cgpa": 9.42,
+    "skills": [
+      "Python",
+      "TensorFlow",
+      "Flask",
+      "MongoDB"
+    ],
+    "email": "aarav.sharma@example.com",
+    "phone": "9845000001",
+    "about": "Final-year student looking for a software or core engineering role. Comfortable with team projects and quick to learn new tools."
+  },
+  {
+    "usn": "CH22AI002",
+    "name": "Diya Nair",
+    "branch": "AIML",
+    "cgpa": 9.1,
+    "skills": [
+      "Python",
+      "PyTorch",
+      "OpenCV",
+      "SQL"
+    ],
+    "email": "diya.nair@example.com",
+    "phone": "9845000002",
+    "about": "Final-year student looking for a software or core engineering role. Comfortable with team projects and quick to learn new tools."
+  },
+  {
+    "usn": "CH22CS003",
+    "name": "Rohan Gowda",
+    "branch": "CSE",
+    "cgpa": 8.75,
+    "skills": [
+      "Java",
+      "Spring Boot",
+      "MySQL",
+      "React"
+    ],
+    "email": "rohan.gowda@example.com",
+    "phone": "9845000003",
+    "about": "Final-year student looking for a software or core engineering role. Comfortable with team projects and quick to learn new tools."
+  },
+  {
+    "usn": "CH22CS004",
+    "name": "Sneha Rao",
+    "branch": "CSE",
+    "cgpa": 8.4,
+    "skills": [
+      "JavaScript",
+      "Node.js",
+      "MongoDB",
+      "React"
+    ],
+    "email": "sneha.rao@example.com",
+    "phone": "9845000004",
+    "about": "Final-year student looking for a software or core engineering role. Comfortable with team projects and quick to learn new tools."
+  },
+  {
+    "usn": "CH22IS005",
+    "name": "Karthik Hegde",
+    "branch": "ISE",
+    "cgpa": 8.1,
+    "skills": [
+      "Python",
+      "Django",
+      "PostgreSQL",
+      "Docker"
+    ],
+    "email": "karthik.hegde@example.com",
+    "phone": "9845000005",
+    "about": "Final-year student looking for a software or core engineering role. Comfortable with team projects and quick to learn new tools."
+  },
+  {
+    "usn": "CH22IS006",
+    "name": "Meera Iyer",
+    "branch": "ISE",
+    "cgpa": 9.0,
+    "skills": [
+      "C++",
+      "DSA",
+      "Java",
+      "SQL"
+    ],
+    "email": "meera.iyer@example.com",
+    "phone": "9845000006",
+    "about": "Final-year student looking for a software or core engineering role. Comfortable with team projects and quick to learn new tools."
+  },
+  {
+    "usn": "CH22EC007",
+    "name": "Vivek Patil",
+    "branch": "ECE",
+    "cgpa": 7.85,
+    "skills": [
+      "Embedded C",
+      "IoT",
+      "Python",
+      "MATLAB"
+    ],
+    "email": "vivek.patil@example.com",
+    "phone": "9845000007",
+    "about": "Final-year student looking for a software or core engineering role. Comfortable with team projects and quick to learn new tools."
+  },
+  {
+    "usn": "CH22EC008",
+    "name": "Ananya Kulkarni",
+    "branch": "ECE",
+    "cgpa": 8.3,
+    "skills": [
+      "VLSI",
+      "Verilog",
+      "Python"
+    ],
+    "email": "ananya.k@example.com",
+    "phone": "9845000008",
+    "about": "Final-year student looking for a software or core engineering role. Comfortable with team projects and quick to learn new tools."
+  },
+  {
+    "usn": "CH22AI009",
+    "name": "Harsha Bhat",
+    "branch": "AIML",
+    "cgpa": 8.6,
+    "skills": [
+      "Python",
+      "NLP",
+      "Hugging Face",
+      "Flask"
+    ],
+    "email": "harsha.bhat@example.com",
+    "phone": "9845000009",
+    "about": "Final-year student looking for a software or core engineering role. Comfortable with team projects and quick to learn new tools."
+  },
+  {
+    "usn": "CH22CS010",
+    "name": "Pooja Shetty",
+    "branch": "CSE",
+    "cgpa": 7.95,
+    "skills": [
+      "Java",
+      "Angular",
+      "MySQL"
+    ],
+    "email": "pooja.shetty@example.com",
+    "phone": "9845000010",
+    "about": "Final-year student looking for a software or core engineering role. Comfortable with team projects and quick to learn new tools."
+  },
+  {
+    "usn": "CH22EE011",
+    "name": "Manoj Kumar",
+    "branch": "EEE",
+    "cgpa": 7.6,
+    "skills": [
+      "PLC",
+      "MATLAB",
+      "Python"
+    ],
+    "email": "manoj.kumar@example.com",
+    "phone": "9845000011",
+    "about": "Final-year student looking for a software or core engineering role. Comfortable with team projects and quick to learn new tools."
+  },
+  {
+    "usn": "CH22ME012",
+    "name": "Ishaan Reddy",
+    "branch": "ME",
+    "cgpa": 7.4,
+    "skills": [
+      "AutoCAD",
+      "SolidWorks",
+      "Python"
+    ],
+    "email": "ishaan.reddy@example.com",
+    "phone": "9845000012",
+    "about": "Final-year student looking for a software or core engineering role. Comfortable with team projects and quick to learn new tools."
+  }
+]

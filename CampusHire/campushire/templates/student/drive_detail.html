@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% from '_macros.html' import avatar, csrf, empty, interest_button %}
+{% block title %}{{ drive.company }}{% endblock %}
+{% block content %}
+{% set d = drive %}
+{% set _ = d.update({'interested': interested, 'eligible': eligible, 'reason': reason}) %}
+<a href="{{ url_for('drives_list') }}" class="small"><i class="bi bi-arrow-left"></i> All drives</a>
+<div class="row g-3 mt-1">
+  <div class="col-lg-7">
+    <div class="glass glass-body h-100">
+      <div class="d-flex gap-3 align-items-center mb-3">
+        <div class="company-logo" style="width:60px;height:60px;font-size:1.4rem">{{ d.company[:1] }}</div>
+        <div><h3 class="mb-0">{{ d.company }}</h3><div class="text-muted">{{ d.role }}</div></div>
+        <span class="badge ms-auto {{ 'badge-soft' if d.status == 'upcoming' else 'badge-done' }}">{{ d.status|capitalize }}</span>
+      </div>
+      <p>{{ d.description or 'Details will be shared by the placement cell.' }}</p>
+      <div class="row g-2 small">
+        <div class="col-sm-6"><i class="bi bi-cash-coin text-primary"></i> <b>{{ '%.1f'|format(d.package_lpa) }} LPA</b></div>
+        <div class="col-sm-6"><i class="bi bi-calendar-event text-primary"></i> {{ d.drive_date|fmtdate }}</div>
+        <div class="col-sm-6"><i class="bi bi-geo-alt text-primary"></i> {{ d.location or 'To be announced' }}</div>
+        <div class="col-sm-6"><i class="bi bi-people text-primary"></i> {{ interest_count }} interested</div>
+        <div class="col-sm-6"><i class="bi bi-mortarboard text-primary"></i> Minimum CGPA {{ '%.1f'|format(d.min_cgpa or 0) }}</div>
+        <div class="col-sm-6"><i class="bi bi-diagram-3 text-primary"></i> {{ d.eligible_branches|join(', ') if d.eligible_branches else 'All branches' }}</div>
+      </div>
+      <div class="mt-4">{{ interest_button(d, request.path, small=False) }}
+        {% if d.status == 'upcoming' and not eligible and not interested %}<div class="small text-danger mt-2">{{ reason }}</div>{% endif %}</div>
+    </div>
+  </div>
+  <div class="col-lg-5">
+    <div class="glass glass-body h-100">
+      <h5 class="mb-3">Selection process</h5>
+      <ul class="timeline">
+        {% for r in d.rounds %}
+        <li><div class="fw-semibold">{{ r.name }}</div><div class="small text-muted">{{ r.type }} &middot; {{ r.mode }}{% if r.date %} &middot; {{ r.date }}{% endif %}</div></li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+  {% if d.status == 'completed' %}
+  <div class="col-12"><div class="glass glass-body">
+    <h5 class="mb-3">Selected students</h5>
+    <div class="row g-3">
+      {% for s in selected %}<div class="col-sm-6 col-lg-4"><div class="d-flex align-items-center gap-2">{{ avatar(s, 44) }}<div><div class="fw-semibold">{{ s.name }}</div><div class="small text-muted">{{ s.usn }} &middot; {{ s.branch }}</div></div></div></div>
+      {% else %}<div class="col-12">{{ empty('bi-hourglass', 'No selections published') }}</div>{% endfor %}
+    </div>
+  </div></div>
+  {% endif %}
+</div>
+{% endblock %}

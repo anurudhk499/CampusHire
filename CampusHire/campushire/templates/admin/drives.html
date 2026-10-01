@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% from '_macros.html' import csrf, empty %}
+{% block title %}Manage drives{% endblock %}
+{% block content %}
+<div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3">
+  <div><h2 class="page-title">Placement drives</h2><div class="text-muted">Add, edit, delete drives and publish results.</div></div>
+  <a class="btn btn-primary" href="{{ url_for('admin_drive_new') }}"><i class="bi bi-plus-lg"></i> Add drive</a>
+</div>
+<form class="glass glass-body mb-4" method="get"><div class="row g-2 align-items-end">
+  <div class="col-md-4"><label class="form-label" for="company">Company</label><input class="form-control" id="company" name="company" value="{{ company }}"></div>
+  <div class="col-md-4"><label class="form-label" for="role">Role</label><input class="form-control" id="role" name="role" value="{{ role }}"></div>
+  <div class="col-md-2"><label class="form-label" for="status">Status</label><select class="form-select" id="status" name="status">{% for v in ('all', 'upcoming', 'completed') %}<option value="{{ v }}" {{ 'selected' if status == v }}>{{ v|capitalize }}</option>{% endfor %}</select></div>
+  <div class="col-md-2 d-grid"><button class="btn btn-primary"><i class="bi bi-search"></i> Search</button></div>
+</div></form>
+<div class="glass glass-body">
+  {% if items %}
+  <div class="table-wrap"><table class="table">
+    <thead><tr><th>Company</th><th>Role</th><th>Date</th><th>Package</th><th>Rounds</th><th>Interested</th><th>Status</th><th class="text-end">Actions</th></tr></thead>
+    <tbody>
+    {% for d in items %}
+    <tr>
+      <td class="fw-semibold">{{ d.company }}</td><td>{{ d.role }}</td><td>{{ d.drive_date|fmtdate }}</td><td>{{ '%.1f'|format(d.package_lpa) }} LPA</td><td>{{ d.rounds|length }}</td>
+      <td><a href="{{ url_for('admin_drive_interested', drive_id=d._id) }}">{{ d.interest_count }} students</a></td>
+      <td><span class="badge {{ 'badge-soft' if d.status == 'upcoming' else 'badge-done' }}">{{ d.status|capitalize }}</span></td>
+      <td class="text-end text-nowrap">
+        <a class="btn btn-outline-primary btn-sm" href="{{ url_for('admin_drive_publish', drive_id=d._id) }}"><i class="bi bi-megaphone"></i> {{ 'Update results' if d.status == 'completed' else 'Publish results' }}</a>
+        <a class="btn btn-outline-primary btn-sm" href="{{ url_for('admin_drive_edit', drive_id=d._id) }}" aria-label="Edit {{ d.company }}"><i class="bi bi-pencil"></i></a>
+        <form class="d-inline" method="post" action="{{ url_for('admin_drive_delete', drive_id=d._id) }}" data-confirm="Delete the {{ d.company }} drive and all its interest records?">{{ csrf() }}<button class="btn btn-outline-danger btn-sm" aria-label="Delete {{ d.company }}"><i class="bi bi-trash"></i></button></form>
+      </td>
+    </tr>
+    {% endfor %}
+    </tbody></table></div>
+  {% else %}{{ empty('bi-calendar-x', 'No drives found', 'Add a drive or clear the filters.') }}{% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,150 @@
+[
+  {
+    "usn": "CH22AI001",
+    "company": "Zoho"
+  },
+  {
+    "usn": "CH22CS003",
+    "company": "Zoho"
+  },
+  {
+    "usn": "CH22CS004",
+    "company": "Zoho"
+  },
+  {
+    "usn": "CH22IS006",
+    "company": "Zoho"
+  },
+  {
+    "usn": "CH22AI009",
+    "company": "Zoho"
+  },
+  {
+    "usn": "CH22EC007",
+    "company": "Zoho"
+  },
+  {
+    "usn": "CH22AI001",
+    "company": "Razorpay"
+  },
+  {
+    "usn": "CH22AI002",
+    "company": "Razorpay"
+  },
+  {
+    "usn": "CH22CS003",
+    "company": "Razorpay"
+  },
+  {
+    "usn": "CH22IS006",
+    "company": "Razorpay"
+  },
+  {
+    "usn": "CH22CS004",
+    "company": "Razorpay"
+  },
+  {
+    "usn": "CH22EC007",
+    "company": "Bosch"
+  },
+  {
+    "usn": "CH22EC008",
+    "company": "Bosch"
+  },
+  {
+    "usn": "CH22EE011",
+    "company": "Bosch"
+  },
+  {
+    "usn": "CH22ME012",
+    "company": "Bosch"
+  },
+  {
+    "usn": "CH22CS010",
+    "company": "Capgemini"
+  },
+  {
+    "usn": "CH22IS005",
+    "company": "Capgemini"
+  },
+  {
+    "usn": "CH22ME012",
+    "company": "Capgemini"
+  },
+  {
+    "usn": "CH22EE011",
+    "company": "Capgemini"
+  },
+  {
+    "usn": "CH22EC008",
+    "company": "Capgemini"
+  },
+  {
+    "usn": "CH22AI002",
+    "company": "TCS Digital"
+  },
+  {
+    "usn": "CH22IS005",
+    "company": "TCS Digital"
+  },
+  {
+    "usn": "CH22AI009",
+    "company": "TCS Digital"
+  },
+  {
+    "usn": "CH22CS010",
+    "company": "TCS Digital"
+  },
+  {
+    "usn": "CH22CS003",
+    "company": "Infosys"
+  },
+  {
+    "usn": "CH22IS006",
+    "company": "Infosys"
+  },
+  {
+    "usn": "CH22AI002",
+    "company": "Infosys"
+  },
+  {
+    "usn": "CH22CS010",
+    "company": "Infosys"
+  },
+  {
+    "usn": "CH22EC007",
+    "company": "Infosys"
+  },
+  {
+    "usn": "CH22CS004",
+    "company": "Wipro"
+  },
+  {
+    "usn": "CH22IS005",
+    "company": "Wipro"
+  },
+  {
+    "usn": "CH22AI009",
+    "company": "Wipro"
+  },
+  {
+    "usn": "CH22EC008",
+    "company": "Wipro"
+  },
+  {
+    "usn": "CH22AI001",
+    "company": "Accenture"
+  },
+  {
+    "usn": "CH22AI009",
+    "company": "Accenture"
+  },
+  {
+    "usn": "CH22CS010",
+    "company": "Accenture"
+  },
+  {
+    "usn": "CH22CS003",
+    "company": "Accenture"
+  }
+]

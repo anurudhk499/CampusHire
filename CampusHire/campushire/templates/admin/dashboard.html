@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% from '_macros.html' import empty %}
+{% block title %}Officer dashboard{% endblock %}
+{% block content %}
+<div class="d-flex flex-wrap justify-content-between align-items-center mb-3 gap-2">
+  <div><h2 class="page-title">Placement dashboard</h2><div class="text-muted">Live analytics from MongoDB aggregation pipelines.</div></div>
+  <a class="btn btn-primary" href="{{ url_for('admin_drive_new') }}"><i class="bi bi-plus-lg"></i> Add drive</a>
+</div>
+
+<div class="row g-3 mb-3">
+  {% set tiles = [('bi-people-fill', counts.students, 'Students'), ('bi-kanban-fill', counts.projects, 'Projects'), ('bi-buildings-fill', counts.drives, 'Drives'), ('bi-hand-thumbs-up-fill', counts.interests, 'Interests'), ('bi-award-fill', placed, 'Students placed'), ('bi-folder-fill', gstats.files, 'GridFS files')] %}
+  {% for icon, value, label in tiles %}
+  <div class="col-6 col-md-4 col-xl-2"><div class="glass glass-body stat"><div class="stat-icon"><i class="bi {{ icon }}"></i></div><div><div class="stat-value">{{ value }}</div><div class="stat-label">{{ label }}</div></div></div></div>
+  {% endfor %}
+</div>
+
+<div class="row g-3 mb-3">
+  <div class="col-lg-6"><div class="glass glass-body h-100"><h5>Students by branch</h5><div class="chart-box"><canvas id="c-branch" aria-label="Students by branch"></canvas></div></div></div>
+  <div class="col-lg-6"><div class="glass glass-body h-100"><h5>Interest by company</h5><div class="chart-box"><canvas id="c-interest" aria-label="Interest by company"></canvas></div></div></div>
+  <div class="col-lg-6"><div class="glass glass-body h-100"><h5>Projects by technology</h5><div class="chart-box"><canvas id="c-tech" aria-label="Projects by technology"></canvas></div></div></div>
+  <div class="col-lg-6"><div class="glass glass-body h-100"><h5>Upcoming vs completed drives</h5><div class="chart-box"><canvas id="c-status" aria-label="Upcoming versus completed drives"></canvas></div>
+    <div class="text-center small text-muted mt-2">{{ status.get('upcoming', 0) }} upcoming &middot; {{ status.get('completed', 0) }} completed</div></div></div>
+</div>
+
+<div class="row g-3">
+  <div class="col-lg-4"><div class="glass glass-body h-100">
+    <h5>Collection counts</h5>
+    <div class="table-wrap"><table class="table"><thead><tr><th>Collection</th><th class="text-end">Documents</th></tr></thead><tbody>
+      {% for name in ('students', 'projects', 'drives', 'interests') %}<tr><td><code>{{ name }}</code></td><td class="text-end fw-semibold">{{ counts[name] }}</td></tr>{% endfor %}
+      <tr><td><code>fs.files</code></td><td class="text-end fw-semibold">{{ gstats.files }}</td></tr>
+      <tr><td><code>fs.chunks</code></td><td class="text-end fw-semibold">{{ gstats.chunks }}</td></tr>
+    </tbody></table></div>
+  </div></div>
+  <div class="col-lg-4"><div class="glass glass-body h-100">
+    <h5>GridFS storage</h5>
+    <p class="text-muted small mb-2">{{ gstats.files }} files in {{ gstats.chunks }} chunks &middot; {{ '%.1f'|format(gstats.bytes / 1024) }} KB</p>
+    <div class="table-wrap"><table class="table"><thead><tr><th>File type</th><th class="text-end">Files</th><th class="text-end">KB</th></tr></thead><tbody>
+      {% for t in gstats.by_type %}<tr><td>{{ t._id or 'other' }}</td><td class="text-end">{{ t.count }}</td><td class="text-end">{{ '%.1f'|format(t.bytes / 1024) }}</td></tr>
+      {% else %}<tr><td colspan="3" class="text-muted">No files stored yet.</td></tr>{% endfor %}
+    </tbody></table></div>
+  </div></div>
+  <div class="col-lg-4"><div class="glass glass-body h-100">
+    <div class="d-flex justify-content-between"><h5>Latest drives</h5><a href="{{ url_for('admin_drives') }}">Manage</a></div>
+    {% for d in recent %}
+    <div class="d-flex align-items-center gap-2 py-2 border-top"><div class="company-logo" style="width:38px;height:38px">{{ d.company[:1] }}</div>
+      <div class="flex-grow-1"><div class="fw-semibold small">{{ d.company }}</div><div class="text-muted small">{{ d.drive_date|fmtdate }}</div></div>
+      <span class="badge {{ 'badge-soft' if d.status == 'upcoming' else 'badge-done' }}">{{ d.interest_count }} interested</span></div>
+    {% else %}{{ empty('bi-calendar-x', 'No drives yet') }}{% endfor %}
+  </div></div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+<script>
+  const A = {{ charts|tojson }};
+  const blues = ['#1d4ed8', '#3b82f6', '#60a5fa', '#93c5fd', '#1e40af', '#0ea5e9', '#38bdf8', '#7dd3fc', '#312e81', '#6366f1', '#a5b4fc', '#c7d2fe'];
+  Chart.defaults.font.family = "'Poppins', sans-serif";
+  function draw(id, type, data, opts) {
+    const el = document.getElementById(id);
+    if (!data.labels.length) { el.parentElement.innerHTML = '<div class="empty">No data yet</div>'; return; }
+    new Chart(el, {
+      type: type,
+      data: { labels: data.labels, datasets: [{ data: data.values, backgroundColor: blues, borderRadius: type === 'bar' ? 8 : 0, borderWidth: 0 }] },
+      options: Object.assign({ responsive: true, maintainAspectRatio: false, plugins: { legend: { display: type === 'doughnut', position: 'right' } } }, opts || {})
+    });
+  }
+  const noGrid = { scales: { y: { beginAtZero: true, ticks: { precision: 0 } }, x: { grid: { display: false } } } };
+  draw('c-branch', 'doughnut', A.branch);
+  draw('c-interest', 'bar', A.interest, noGrid);
+  draw('c-tech', 'bar', A.tech, { indexAxis: 'y', scales: { x: { beginAtZero: true, ticks: { precision: 0 } }, y: { grid: { display: false } } } });
+  draw('c-status', 'doughnut', A.status);
+</script>
+{% endblock %}

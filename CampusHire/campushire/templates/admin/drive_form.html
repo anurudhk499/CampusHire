@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% from '_macros.html' import csrf %}
+{% block title %}{{ 'Add drive' if mode == 'new' else 'Edit drive' }}{% endblock %}
+{% block content %}
+{% macro round_row(r={}) %}
+<div class="round-row row g-2 align-items-end mb-2">
+  <div class="col-md-4"><label class="form-label small">Round name</label><input class="form-control" name="round_name" value="{{ r.get('name', '') }}" placeholder="e.g. Technical interview"></div>
+  <div class="col-md-3"><label class="form-label small">Type</label><select class="form-select" name="round_type">{% for t in round_types %}<option {{ 'selected' if r.get('type') == t }}>{{ t }}</option>{% endfor %}</select></div>
+  <div class="col-md-2"><label class="form-label small">Mode</label><select class="form-select" name="round_mode">{% for m in round_modes %}<option {{ 'selected' if r.get('mode') == m }}>{{ m }}</option>{% endfor %}</select></div>
+  <div class="col-md-2"><label class="form-label small">Date</label><input class="form-control" type="date" name="round_date" value="{{ r.get('date', '') }}"></div>
+  <div class="col-md-1 d-grid"><button type="button" class="btn btn-outline-danger remove-round" aria-label="Remove round"><i class="bi bi-x-lg"></i></button></div>
+</div>
+{% endmacro %}
+<div class="glass glass-body" style="max-width: 940px; margin: 0 auto;">
+  <h3 class="mb-3">{{ 'Add placement drive' if mode == 'new' else 'Edit placement drive' }}</h3>
+  <form method="post" novalidate>
+    {{ csrf() }}
+    <div class="row g-3">
+      <div class="col-md-6"><label class="form-label" for="company">Company</label><input class="form-control" id="company" name="company" value="{{ drive.get('company', '') }}" required></div>
+      <div class="col-md-6"><label class="form-label" for="role">Role</label><input class="form-control" id="role" name="role" value="{{ drive.get('role', '') }}" required></div>
+      <div class="col-md-3"><label class="form-label" for="package_lpa">Package (LPA)</label><input class="form-control" id="package_lpa" name="package_lpa" type="number" step="0.1" min="0" value="{{ drive.get('package_lpa') if drive.get('package_lpa') is not none else '' }}" required></div>
+      <div class="col-md-3"><label class="form-label" for="min_cgpa">Minimum CGPA</label><input class="form-control" id="min_cgpa" name="min_cgpa" type="number" step="0.1" min="0" max="10" value="{{ drive.get('min_cgpa', 0) }}"></div>
+      <div class="col-md-3"><label class="form-label" for="drive_date">Drive date</label><input class="form-control" id="drive_date" name="drive_date" type="date" value="{{ drive.drive_date.strftime('%Y-%m-%d') if drive.get('drive_date') else '' }}" required></div>
+      <div class="col-md-3"><label class="form-label" for="status">Status</label><select class="form-select" id="status" name="status">{% for v in ('upcoming', 'completed') %}<option value="{{ v }}" {{ 'selected' if drive.get('status') == v }}>{{ v|capitalize }}</option>{% endfor %}</select></div>
+      <div class="col-md-6"><label class="form-label" for="location">Location</label><input class="form-control" id="location" name="location" value="{{ drive.get('location', '') }}"></div>
+      <div class="col-md-6"><label class="form-label d-block">Eligible branches</label>
+        {% for b in BRANCHES %}<div class="form-check form-check-inline"><input class="form-check-input" type="checkbox" name="branches" id="b-{{ b }}" value="{{ b }}" {{ 'checked' if b in drive.get('eligible_branches', []) }}><label class="form-check-label small" for="b-{{ b }}">{{ b }}</label></div>{% endfor %}
+        <div class="form-text">Leave all unchecked to open the drive to every branch.</div></div>
+      <div class="col-12"><label class="form-label" for="description">Description</label><textarea class="form-control" id="description" name="description" rows="3" maxlength="1500">{{ drive.get('description', '') }}</textarea></div>
+    </div>
+    <h5 class="mt-4 mb-2">Placement rounds</h5>
+    <div id="rounds">{% for r in drive.get('rounds', []) %}{{ round_row(r) }}{% endfor %}</div>
+    <button type="button" id="add-round" class="btn btn-outline-primary btn-sm mt-1"><i class="bi bi-plus-lg"></i> Add round</button>
+    <template id="round-template">{{ round_row() }}</template>
+    <div class="d-flex gap-2 mt-4"><button class="btn btn-primary">{{ 'Add drive' if mode == 'new' else 'Save changes' }}</button><a class="btn btn-outline-primary" href="{{ url_for('admin_drives') }}">Cancel</a></div>
+  </form>
+</div>
+{% endblock %}

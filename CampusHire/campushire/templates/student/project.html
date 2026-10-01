@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% from '_macros.html' import csrf %}
+{% block title %}My project{% endblock %}
+{% block content %}
+{% set p = project or {} %}
+<div class="glass glass-body" style="max-width: 820px; margin: 0 auto;">
+  <h3 class="mb-1">{{ 'Edit your project' if p.get('screenshot_id') else 'Add your project' }}</h3>
+  <p class="text-muted">Each student can showcase one project.</p>
+  <form method="post" enctype="multipart/form-data" novalidate>
+    {{ csrf() }}
+    <div class="row g-3">
+      <div class="col-12"><label class="form-label" for="title">Project title</label><input class="form-control" id="title" name="title" value="{{ p.get('title', '') }}" required></div>
+      <div class="col-12"><label class="form-label" for="description">Description</label><textarea class="form-control" id="description" name="description" rows="4" maxlength="1000" required>{{ p.get('description', '') }}</textarea></div>
+      <div class="col-md-6"><label class="form-label" for="technologies">Technologies</label><input class="form-control" id="technologies" name="technologies" value="{{ p.get('technologies', [])|join(', ') }}" placeholder="Python, Flask, MongoDB" required></div>
+      <div class="col-md-6"><label class="form-label" for="github_url">Repository link (optional)</label><input class="form-control" id="github_url" name="github_url" type="url" value="{{ p.get('github_url', '') }}" placeholder="https://github.com/..."></div>
+      <div class="col-12"><label class="form-label" for="screenshot">Screenshot</label>
+        <input class="form-control" id="screenshot" name="screenshot" type="file" accept="image/png,image/jpeg,image/webp" data-preview="shot-preview">
+        <div class="form-text">{% if p.get('screenshot_id') %}Upload a new image to replace the current one.{% else %}PNG, JPG or WEBP, up to 5 MB.{% endif %}</div>
+        <img id="shot-preview" class="project-shot mt-2 {{ '' if p.get('screenshot_id') else 'd-none' }}" style="max-width: 320px" alt="Screenshot preview" {% if p.get('screenshot_id') %}src="{{ url_for('serve_file', file_id=p.screenshot_id) }}"{% endif %}></div>
+    </div>
+    <div class="d-flex gap-2 mt-4"><button class="btn btn-primary">Save project</button><a class="btn btn-outline-primary" href="{{ url_for('profile') }}">Cancel</a></div>
+  </form>
+  {% if p.get('screenshot_id') %}
+  <form method="post" action="{{ url_for('delete_project') }}" data-confirm="Remove this project and its screenshot?" class="mt-3">{{ csrf() }}<button class="btn btn-link text-danger p-0">Remove project</button></form>
+  {% endif %}
+</div>
+{% endblock %}

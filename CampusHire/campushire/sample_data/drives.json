@@ -1,0 +1,287 @@
+[
+  {
+    "company": "Zoho",
+    "role": "Software Developer",
+    "package_lpa": 8.0,
+    "location": "Chennai",
+    "offset": 6,
+    "status": "upcoming",
+    "min_cgpa": 7.5,
+    "branches": [
+      "CSE",
+      "AIML",
+      "ISE",
+      "ECE"
+    ],
+    "description": "Zoho is hiring developers for its product teams. Strong programming fundamentals and problem solving are expected.",
+    "rounds": [
+      {
+        "name": "Round 1: Programming Test",
+        "type": "Coding Test",
+        "mode": "Online",
+        "day_offset": 0
+      },
+      {
+        "name": "Round 2: Advanced Programming",
+        "type": "Coding Test",
+        "mode": "On-campus",
+        "day_offset": 1
+      },
+      {
+        "name": "Round 3: Technical Interview",
+        "type": "Technical Interview",
+        "mode": "On-campus",
+        "day_offset": 2
+      },
+      {
+        "name": "Round 4: HR Interview",
+        "type": "HR Interview",
+        "mode": "On-campus",
+        "day_offset": 2
+      }
+    ]
+  },
+  {
+    "company": "Razorpay",
+    "role": "SDE-1",
+    "package_lpa": 18.0,
+    "location": "Bengaluru",
+    "offset": 12,
+    "status": "upcoming",
+    "min_cgpa": 8.5,
+    "branches": [
+      "CSE",
+      "AIML",
+      "ISE"
+    ],
+    "description": "Backend and full-stack engineering roles building payment infrastructure at scale.",
+    "rounds": [
+      {
+        "name": "Online Assessment",
+        "type": "Online Test",
+        "mode": "Online",
+        "day_offset": 0
+      },
+      {
+        "name": "System Design Discussion",
+        "type": "Technical Interview",
+        "mode": "Virtual",
+        "day_offset": 3
+      },
+      {
+        "name": "Hiring Manager Round",
+        "type": "HR Interview",
+        "mode": "Virtual",
+        "day_offset": 4
+      }
+    ]
+  },
+  {
+    "company": "Bosch",
+    "role": "Embedded Engineer",
+    "package_lpa": 6.5,
+    "location": "Bengaluru",
+    "offset": 18,
+    "status": "upcoming",
+    "min_cgpa": 7.0,
+    "branches": [
+      "ECE",
+      "EEE",
+      "ME"
+    ],
+    "description": "Embedded software and hardware engineers for automotive electronics.",
+    "rounds": [
+      {
+        "name": "Aptitude and Technical Test",
+        "type": "Online Test",
+        "mode": "On-campus",
+        "day_offset": 0
+      },
+      {
+        "name": "Technical Interview",
+        "type": "Technical Interview",
+        "mode": "On-campus",
+        "day_offset": 1
+      },
+      {
+        "name": "HR Interview",
+        "type": "HR Interview",
+        "mode": "On-campus",
+        "day_offset": 1
+      }
+    ]
+  },
+  {
+    "company": "Capgemini",
+    "role": "Analyst",
+    "package_lpa": 4.0,
+    "location": "Mumbai",
+    "offset": 25,
+    "status": "upcoming",
+    "min_cgpa": 6.5,
+    "branches": [],
+    "description": "Open to all branches. Training is provided in the first three months.",
+    "rounds": [
+      {
+        "name": "Aptitude Test",
+        "type": "Online Test",
+        "mode": "Online",
+        "day_offset": 0
+      },
+      {
+        "name": "Group Discussion",
+        "type": "Group Discussion",
+        "mode": "On-campus",
+        "day_offset": 1
+      },
+      {
+        "name": "Interview",
+        "type": "HR Interview",
+        "mode": "On-campus",
+        "day_offset": 1
+      }
+    ]
+  },
+  {
+    "company": "TCS Digital",
+    "role": "Digital Engineer",
+    "package_lpa": 7.0,
+    "location": "Hyderabad",
+    "offset": 35,
+    "status": "upcoming",
+    "min_cgpa": 7.5,
+    "branches": [
+      "CSE",
+      "AIML",
+      "ISE",
+      "ECE"
+    ],
+    "description": "Digital profile for candidates strong in coding and emerging technologies.",
+    "rounds": [
+      {
+        "name": "TCS Advanced Test",
+        "type": "Online Test",
+        "mode": "Online",
+        "day_offset": 0
+      },
+      {
+        "name": "Technical Interview",
+        "type": "Technical Interview",
+        "mode": "Virtual",
+        "day_offset": 5
+      },
+      {
+        "name": "Managerial and HR",
+        "type": "HR Interview",
+        "mode": "Virtual",
+        "day_offset": 5
+      }
+    ]
+  },
+  {
+    "company": "Infosys",
+    "role": "System Engineer",
+    "package_lpa": 4.5,
+    "location": "Mysuru",
+    "offset": -45,
+    "status": "completed",
+    "min_cgpa": 6.0,
+    "branches": [],
+    "description": "Mass recruitment drive for system engineers. Campus training at the Mysuru DC.",
+    "rounds": [
+      {
+        "name": "Online Test",
+        "type": "Online Test",
+        "mode": "Online",
+        "day_offset": 0
+      },
+      {
+        "name": "Technical Interview",
+        "type": "Technical Interview",
+        "mode": "On-campus",
+        "day_offset": 2
+      },
+      {
+        "name": "HR Interview",
+        "type": "HR Interview",
+        "mode": "On-campus",
+        "day_offset": 2
+      }
+    ],
+    "selected": [
+      "CH22CS003",
+      "CH22IS006",
+      "CH22AI002"
+    ]
+  },
+  {
+    "company": "Wipro",
+    "role": "Project Engineer",
+    "package_lpa": 3.6,
+    "location": "Bengaluru",
+    "offset": -30,
+    "status": "completed",
+    "min_cgpa": 6.0,
+    "branches": [],
+    "description": "Elite National Talent Hunt drive for project engineers.",
+    "rounds": [
+      {
+        "name": "Online Assessment",
+        "type": "Online Test",
+        "mode": "Online",
+        "day_offset": 0
+      },
+      {
+        "name": "Interview",
+        "type": "Technical Interview",
+        "mode": "Virtual",
+        "day_offset": 3
+      }
+    ],
+    "selected": [
+      "CH22CS004",
+      "CH22IS005"
+    ]
+  },
+  {
+    "company": "Accenture",
+    "role": "Associate Software Engineer",
+    "package_lpa": 4.6,
+    "location": "Pune",
+    "offset": -14,
+    "status": "completed",
+    "min_cgpa": 6.5,
+    "branches": [
+      "CSE",
+      "AIML",
+      "ISE",
+      "ECE"
+    ],
+    "description": "Associate software engineers for application development and testing.",
+    "rounds": [
+      {
+        "name": "Cognitive and Technical Assessment",
+        "type": "Online Test",
+        "mode": "Online",
+        "day_offset": 0
+      },
+      {
+        "name": "Communication Assessment",
+        "type": "Group Discussion",
+        "mode": "Online",
+        "day_offset": 1
+      },
+      {
+        "name": "Interview",
+        "type": "Technical Interview",
+        "mode": "Virtual",
+        "day_offset": 4
+      }
+    ],
+    "selected": [
+      "CH22AI001",
+      "CH22AI009",
+      "CH22CS010"
+    ]
+  }
+]

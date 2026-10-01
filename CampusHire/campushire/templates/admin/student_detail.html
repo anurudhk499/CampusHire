@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% from '_macros.html' import empty %}
+{% block title %}{{ s.name }}{% endblock %}
+{% block content %}
+<a href="{{ url_for('admin_students') }}" class="small"><i class="bi bi-arrow-left"></i> All students</a>
+<div class="row g-3 mt-1">
+  <div class="col-lg-4">
+    <div class="glass glass-body text-center">
+      {% if s.photo_id %}<img class="avatar avatar-xl" src="{{ url_for('serve_file', file_id=s.photo_id) }}" alt="{{ s.name }}">{% else %}<span class="avatar avatar-fallback avatar-xl" style="font-size:3rem">{{ s.name[:1]|upper }}</span>{% endif %}
+      <h4 class="mt-3 mb-0">{{ s.name }}</h4><div class="text-muted">{{ s.usn }} &middot; {{ s.branch }}</div>
+      <div class="mt-2"><span class="badge badge-soft">CGPA {{ '%.2f'|format(s.cgpa) if s.cgpa is not none else 'not set' }}</span></div>
+      <hr><div class="text-start small"><div class="mb-1"><i class="bi bi-envelope text-primary"></i> {{ s.email or '-' }}</div><div class="mb-3"><i class="bi bi-telephone text-primary"></i> {{ s.phone or '-' }}</div></div>
+      {% if s.resume_id %}<div class="d-grid gap-2"><a class="btn btn-primary" href="{{ url_for('serve_file', file_id=s.resume_id, download=1) }}"><i class="bi bi-download"></i> Download resume</a>
+        <a class="btn btn-outline-primary" target="_blank" rel="noopener" href="{{ url_for('serve_file', file_id=s.resume_id) }}"><i class="bi bi-eye"></i> Preview</a></div>
+      {% else %}<div class="text-muted small">No resume uploaded.</div>{% endif %}
+    </div>
+  </div>
+  <div class="col-lg-8">
+    <div class="glass glass-body mb-3"><h5>About</h5><p class="text-muted">{{ s.about or 'No summary added.' }}</p>
+      {% for sk in s.skills %}<span class="chip">{{ sk }}</span>{% endfor %}
+      {% if placed_in %}<div class="mt-3">{% for d in placed_in %}<span class="badge badge-soft"><i class="bi bi-trophy-fill"></i> Selected by {{ d.company }}</span> {% endfor %}</div>{% endif %}</div>
+    <div class="glass glass-body mb-3"><h5>Project</h5>
+      {% if project %}<div class="row g-3"><div class="col-md-5"><img class="project-shot" src="{{ url_for('serve_file', file_id=project.screenshot_id) }}" alt="{{ project.title }}"></div>
+        <div class="col-md-7"><h6>{{ project.title }}</h6><p class="small text-muted">{{ project.description }}</p>{% for t in project.technologies %}<span class="chip">{{ t }}</span>{% endfor %}
+        {% if project.github_url %}<div class="mt-2"><a href="{{ project.github_url }}" target="_blank" rel="noopener noreferrer"><i class="bi bi-github"></i> Repository</a></div>{% endif %}</div></div>
+      {% else %}{{ empty('bi-kanban', 'No project uploaded') }}{% endif %}</div>
+    <div class="glass glass-body"><h5>Drives marked interested</h5>
+      {% if history %}<div class="table-wrap"><table class="table"><thead><tr><th>Company</th><th>Role</th><th>Status</th></tr></thead><tbody>
+        {% for h in history %}<tr><td>{{ h.drive.company }}</td><td>{{ h.drive.role }}</td><td><span class="badge {{ 'badge-soft' if h.drive.status == 'upcoming' else 'badge-done' }}">{{ h.drive.status|capitalize }}</span></td></tr>{% endfor %}
+      </tbody></table></div>{% else %}{{ empty('bi-hand-thumbs-up', 'No interests marked') }}{% endif %}</div>
+  </div>
+</div>
+{% endblock %}

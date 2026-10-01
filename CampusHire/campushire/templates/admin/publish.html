@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% from '_macros.html' import avatar, csrf, empty %}
+{% block title %}Publish results{% endblock %}
+{% block content %}
+<a href="{{ url_for('admin_drives') }}" class="small"><i class="bi bi-arrow-left"></i> All drives</a>
+<div class="glass glass-body mt-2" style="max-width: 900px; margin: 0 auto;">
+  <h3 class="mb-1">Publish results: {{ drive.company }}</h3>
+  <p class="text-muted">Tick the students who were selected. Publishing marks the drive as completed and shows the list to all students.</p>
+  {% if rows %}
+  <form method="post">
+    {{ csrf() }}
+    <div class="table-wrap"><table class="table"><thead><tr><th style="width:48px">Select</th><th>Student</th><th>Branch</th><th>CGPA</th></tr></thead><tbody>
+      {% for r in rows %}{% set s = r.student %}
+      <tr><td><input class="form-check-input" type="checkbox" name="selected" value="{{ s._id }}" id="s-{{ s._id }}" aria-label="Select {{ s.name }}" {{ 'checked' if s._id|string in selected }}></td>
+        <td><label for="s-{{ s._id }}" class="d-flex align-items-center gap-2 mb-0" style="cursor:pointer">{{ avatar(s, 36) }}<span><span class="fw-semibold">{{ s.name }}</span> <span class="small text-muted">{{ s.usn }}</span></span></label></td>
+        <td>{{ s.branch }}</td><td>{{ '%.2f'|format(s.cgpa) if s.cgpa is not none else '-' }}</td></tr>
+      {% endfor %}
+    </tbody></table></div>
+    <div class="d-flex gap-2 mt-3"><button class="btn btn-primary"><i class="bi bi-megaphone"></i> Publish results</button><a class="btn btn-outline-primary" href="{{ url_for('admin_drives') }}">Cancel</a></div>
+  </form>
+  {% else %}{{ empty('bi-hand-thumbs-up', 'No interested students', 'Only students who marked interest can be selected.') }}{% endif %}
+</div>
+{% endblock %}

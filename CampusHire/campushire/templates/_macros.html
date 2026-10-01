@@ -1,0 +1,33 @@
+{% macro avatar(person, size=44) -%}
+{%- if person.photo_id -%}
+<img class="avatar" width="{{ size }}" height="{{ size }}" src="{{ url_for('serve_file', file_id=person.photo_id) }}" alt="{{ person.name }}">
+{%- else -%}
+<span class="avatar avatar-fallback" style="width:{{ size }}px;height:{{ size }}px;font-size:{{ (size * 0.42)|int }}px">{{ (person.name or person.usn or '?')[:1]|upper }}</span>
+{%- endif -%}
+{%- endmacro %}
+
+{% macro empty(icon, title, text='') -%}
+<div class="empty"><i class="bi {{ icon }}"></i><div class="fw-semibold text-dark">{{ title }}</div>{% if text %}<div>{{ text }}</div>{% endif %}</div>
+{%- endmacro %}
+
+{% macro csrf() -%}
+<input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+{%- endmacro %}
+
+{% macro interest_button(drive, next_url, small=True) -%}
+{% if drive.status != 'upcoming' %}
+  <span class="badge badge-done">Completed</span>
+{% elif drive.interested %}
+  <form method="post" action="{{ url_for('toggle_interest', drive_id=drive._id) }}" class="d-inline">
+    {{ csrf() }}<input type="hidden" name="action" value="remove"><input type="hidden" name="next" value="{{ next_url }}">
+    <button class="btn btn-outline-primary {{ 'btn-sm' if small }}"><i class="bi bi-check2-circle"></i> Interested</button>
+  </form>
+{% elif not drive.eligible %}
+  <button class="btn btn-outline-secondary {{ 'btn-sm' if small }}" disabled title="{{ drive.reason }}"><i class="bi bi-slash-circle"></i> Not eligible</button>
+{% else %}
+  <form method="post" action="{{ url_for('toggle_interest', drive_id=drive._id) }}" class="d-inline">
+    {{ csrf() }}<input type="hidden" name="action" value="add"><input type="hidden" name="next" value="{{ next_url }}">
+    <button class="btn btn-primary {{ 'btn-sm' if small }}"><i class="bi bi-hand-thumbs-up"></i> Mark interested</button>
+  </form>
+{% endif %}
+{%- endmacro %}

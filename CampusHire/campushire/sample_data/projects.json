@@ -1,0 +1,97 @@
+[
+  {
+    "usn": "CH22AI001",
+    "title": "NeuroScan AI",
+    "description": "Brain tumor segmentation with an Attention U-Net and a severity classifier for MRI scans.",
+    "technologies": [
+      "Python",
+      "TensorFlow",
+      "Flask",
+      "OpenCV"
+    ],
+    "github_url": "https://github.com/example/neuroscan-ai"
+  },
+  {
+    "usn": "CH22AI002",
+    "title": "Crop Disease Detector",
+    "description": "CNN based leaf disease classifier with a mobile friendly web front end.",
+    "technologies": [
+      "Python",
+      "PyTorch",
+      "OpenCV",
+      "Flask"
+    ],
+    "github_url": ""
+  },
+  {
+    "usn": "CH22CS003",
+    "title": "Hostel Manager",
+    "description": "Hostel room allocation and fee tracking portal for a college hostel.",
+    "technologies": [
+      "Java",
+      "Spring Boot",
+      "MySQL",
+      "React"
+    ],
+    "github_url": ""
+  },
+  {
+    "usn": "CH22CS004",
+    "title": "Campus Buzz",
+    "description": "Real-time campus events feed with RSVP and push notifications.",
+    "technologies": [
+      "Node.js",
+      "MongoDB",
+      "React",
+      "Socket.IO"
+    ],
+    "github_url": ""
+  },
+  {
+    "usn": "CH22IS005",
+    "title": "Deploy Board",
+    "description": "Dashboard that tracks Docker deployments across small test servers.",
+    "technologies": [
+      "Python",
+      "Django",
+      "Docker",
+      "PostgreSQL"
+    ],
+    "github_url": ""
+  },
+  {
+    "usn": "CH22AI009",
+    "title": "Review Pulse",
+    "description": "Sentiment analysis of product reviews using transformer models.",
+    "technologies": [
+      "Python",
+      "NLP",
+      "Hugging Face",
+      "Flask"
+    ],
+    "github_url": ""
+  },
+  {
+    "usn": "CH22EC007",
+    "title": "Smart Irrigation",
+    "description": "IoT soil moisture monitor that drives a pump automatically.",
+    "technologies": [
+      "Embedded C",
+      "IoT",
+      "MQTT",
+      "Python"
+    ],
+    "github_url": ""
+  },
+  {
+    "usn": "CH22CS010",
+    "title": "Library Hub",
+    "description": "Book issue and return system with due-date reminders.",
+    "technologies": [
+      "Java",
+      "Angular",
+      "MySQL"
+    ],
+    "github_url": ""
+  }
+]

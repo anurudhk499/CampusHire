@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% from '_macros.html' import avatar, empty %}
+{% block title %}Completed drives{% endblock %}
+{% block content %}
+<h2 class="page-title">Completed drives and results</h2>
+<p class="text-muted">Students selected by each company.</p>
+<form class="glass glass-body mb-4" method="get"><div class="row g-2"><div class="col-sm-8 col-md-6"><input class="form-control" name="company" value="{{ company }}" placeholder="Search by company" aria-label="Company"></div><div class="col-auto"><button class="btn btn-primary"><i class="bi bi-search"></i> Search</button></div></div></form>
+{% for d in items %}
+<div class="glass glass-body mb-3">
+  <div class="d-flex flex-wrap gap-3 align-items-center mb-3">
+    <div class="company-logo">{{ d.company[:1] }}</div>
+    <div><h5 class="mb-0">{{ d.company }} <span class="text-muted fw-normal">&middot; {{ d.role }}</span></h5><div class="small text-muted">{{ d.drive_date|fmtdate }} &middot; {{ d.location }}</div></div>
+    <div class="ms-auto text-end"><div class="package">{{ '%.1f'|format(d.package_lpa) }} LPA</div><span class="badge badge-soft">{{ d.selected|length }} selected</span></div>
+  </div>
+  <div class="row g-3">
+    {% for s in d.selected %}<div class="col-sm-6 col-lg-4"><div class="d-flex align-items-center gap-2">{{ avatar(s, 42) }}<div><div class="fw-semibold">{{ s.name }}</div><div class="small text-muted">{{ s.usn }} &middot; {{ s.branch }}</div></div></div></div>
+    {% else %}<div class="col-12 text-muted">Results have not been published yet.</div>{% endfor %}
+  </div>
+</div>
+{% else %}<div class="glass glass-body">{{ empty('bi-trophy', 'No completed drives yet', 'Results appear here after the placement cell publishes them.') }}</div>{% endfor %}
+{% endblock %}

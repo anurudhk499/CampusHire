@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% from '_macros.html' import avatar, empty %}
+{% block title %}Students{% endblock %}
+{% block content %}
+<h2 class="page-title">Student profiles</h2>
+<p class="text-muted">Search is case-insensitive and matches part of a word. Separate several skills with commas to require all of them.</p>
+<form class="glass glass-body mb-4" method="get">
+  <div class="row g-2 align-items-end">
+    <div class="col-md-3"><label class="form-label" for="name">Name</label><input class="form-control" id="name" name="name" value="{{ q.name }}"></div>
+    <div class="col-md-2"><label class="form-label" for="usn">USN</label><input class="form-control" id="usn" name="usn" value="{{ q.usn }}"></div>
+    <div class="col-md-2"><label class="form-label" for="branch">Branch</label>
+      <select class="form-select" id="branch" name="branch"><option value="">All</option>{% for b in BRANCHES %}<option {{ 'selected' if q.branch == b }}>{{ b }}</option>{% endfor %}</select></div>
+    <div class="col-md-3"><label class="form-label" for="skills">Skills</label><input class="form-control" id="skills" name="skills" value="{{ q.skills }}" placeholder="python, mongo"></div>
+    <div class="col-md-2 d-grid"><button class="btn btn-primary"><i class="bi bi-search"></i> Search</button></div>
+  </div>
+</form>
+<div class="glass glass-body">
+  <div class="text-muted small mb-2">{{ items|length }} student(s) found</div>
+  {% if items %}
+  <div class="table-wrap"><table class="table">
+    <thead><tr><th>Student</th><th>Branch</th><th>CGPA</th><th>Skills</th><th>Project</th><th class="text-end">Actions</th></tr></thead>
+    <tbody>
+    {% for s in items %}
+    <tr>
+      <td><div class="d-flex align-items-center gap-2">{{ avatar(s, 40) }}<div><a class="fw-semibold" href="{{ url_for('admin_student_detail', student_id=s._id) }}">{{ s.name }}</a><div class="small text-muted">{{ s.usn }}</div></div></div></td>
+      <td>{{ s.branch }}</td>
+      <td>{{ '%.2f'|format(s.cgpa) if s.cgpa is not none else '-' }}</td>
+      <td style="min-width:200px">{% for sk in s.skills %}<span class="chip">{{ sk }}</span>{% endfor %}</td>
+      <td>{{ s.project.title if s.project else '-' }}</td>
+      <td class="text-end text-nowrap">
+        {% if s.resume_id %}<a class="btn btn-outline-primary btn-sm" href="{{ url_for('serve_file', file_id=s.resume_id, download=1) }}"><i class="bi bi-download"></i> Resume</a>
+        {% else %}<span class="text-muted small me-2">No resume</span>{% endif %}
+        <a class="btn btn-primary btn-sm" href="{{ url_for('admin_student_detail', student_id=s._id) }}">View</a>
+      </td>
+    </tr>
+    {% endfor %}
+    </tbody></table></div>
+  {% else %}{{ empty('bi-person-x', 'No students match', 'Try fewer filters or a shorter search term.') }}{% endif %}
+</div>
+{% endblock %}
