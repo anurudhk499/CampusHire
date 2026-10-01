@@ -2,7 +2,7 @@
 
 # CampusHire
 
-### Student Placement Management System
+### End-to-End Campus Placement Tracking System Using Advanced Database Management Concepts
 
 An ADBMS mini project that shows MongoDB's advanced features in a real, working web app.
 
@@ -15,27 +15,8 @@ An ADBMS mini project that shows MongoDB's advanced features in a real, working 
 
 ---
 
-## Table of contents
-1. [About](#about)
-2. [Features](#features)
-3. [Tech stack](#tech-stack)
-4. [Database design](#database-design)
-5. [ADBMS concepts implemented](#adbms-concepts-implemented)
-6. [Analytics dashboard](#analytics-dashboard)
-7. [Getting started](#getting-started)
-8. [Configuration](#configuration)
-9. [Project structure](#project-structure)
-10. [Screenshots](#screenshots)
-11. [Useful mongosh queries](#useful-mongosh-queries)
-12. [Security](#security)
-13. [Troubleshooting](#troubleshooting)
-14. [Future scope](#future-scope)
-15. [License](#license)
-
----
-
 ## About
-CampusHire lets students build a placement profile and follow company drives, while the placement officer manages drives, searches students, downloads resumes, publishes results and watches live analytics.
+**CampusHire** is an end-to-end campus placement tracking system. It lets students build a placement profile and follow company drives, while the placement officer manages drives, searches students, downloads resumes, publishes results and watches live analytics.
 
 The project is built for the **Advanced Database Management Systems (ADBMS)** lab, so the focus is on the database layer: multiple collections, GridFS, ObjectId relationships, embedded documents, aggregation pipelines, regex search and indexing, not just CRUD.
 
